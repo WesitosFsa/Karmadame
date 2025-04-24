@@ -60,30 +60,50 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
               )
           ),
           //Texto en mi imagen
-          child:Container(
-            margin: const EdgeInsets.only(top: 150 , left: 20,right: 20),
-            // Haremos una columna que va mostrar el texto
-            child:Row(
-              children: [
-                Column(
+          child: Stack(
+          children: [
+              Container(
+                margin: const EdgeInsets.only(top: 150, left: 20, right: 20),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     text_bold(text: slidertextotitulo[index]),
-                    text_simple(text: slidertextosubtitulo[index] ,color: Colors.blueGrey,size: 30),
-                    //Espacio entre el texto y el otro container
-                    SizedBox(height: 20,),
+                    text_simple(text: slidertextosubtitulo[index], color: Colors.blueGrey, size: 30),
+                    SizedBox(height: 20),
                     Container(
                       width: 250,
                       child: text_simple(text: slidertexto[index]),
-
                     ),
-                    SizedBox(height: 20,),
-                    ButtonR(width: 120,)
+                    SizedBox(height: 20),
+                    ButtonR(width: 120),
                   ],
-                )
-              ],
-            )
-          )
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(3, (indexDots) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        width: 8,
+                        height: index == indexDots ? 25 : 8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: index == indexDots
+                              ? Colors.white
+                              : const Color.fromARGB(158, 255, 255, 255),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
         );
       }),
     );
