@@ -1,3 +1,4 @@
+import 'package:cochasqui_mitad_del_mundo/screens/main/main_screen.dart';
 import 'package:cochasqui_mitad_del_mundo/screens/register_cochasqui_screen.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
@@ -77,6 +78,14 @@ class _LoginCochasquiScreen extends State<LoginCochasquiScreen> {
                       ButtonR(
                           text: "Iniciar Sesion",
                           showIcon: false,
+                            onTap: () {
+                            
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const MainScreen()),
+                            );
+                       
+                          }
                       ),
                                      const SizedBox(height: 25),
               
