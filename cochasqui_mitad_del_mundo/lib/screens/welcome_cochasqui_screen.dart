@@ -1,3 +1,4 @@
+import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,9 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
                       width: 250,
                       child: text_simple(text: slidertexto[index]),
 
-                    )
+                    ),
+                    SizedBox(height: 20,),
+                    ButtonR(width: 120,)
                   ],
                 )
               ],
