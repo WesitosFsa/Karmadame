@@ -1,3 +1,4 @@
+import 'package:cochasqui_mitad_del_mundo/screens/login_cochasqui_screen.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
@@ -90,10 +91,10 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
                             );
                           } else {
                             // TODO: Navegar a la pantalla de inicio de sesión
-                            // Navigator.pushReplacement(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => LoginScreen()),
-                            // );
+                            Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginCochasquiScreen()),
+                             );
                           }
                         },
                       ),

@@ -5,7 +5,7 @@ class ButtonR extends StatelessWidget {
   double? width;
   final VoidCallback? onTap;
   String? text;
-  final bool showIcon; // 👈 Nueva propiedad
+  final bool showIcon; 
 
   ButtonR({
     Key? key,
@@ -13,7 +13,7 @@ class ButtonR extends StatelessWidget {
     this.isResponsive = false,
     this.onTap,
     this.text,
-    this.showIcon = true, // 👈 Valor por defecto: muestra ícono
+    this.showIcon = true, 
   }) : super(key: key);
 
   @override
