@@ -1,5 +1,6 @@
 import 'package:cochasqui_mitad_del_mundo/screens/register_cochasqui_screen.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
+import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -47,7 +48,7 @@ class _LoginCochasquiScreen extends State<LoginCochasquiScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text('Registrate o accede como invitado'),
+                      text_bold(text: 'Registrate o accede como invitado',size: 16,),
                       const SizedBox(height: 35),
                       TextFormField(
                         controller: _usernameController,
