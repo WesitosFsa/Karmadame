@@ -13,19 +13,19 @@ class WelcomeCochasquiScreen extends StatefulWidget {
 class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
   //Creamos el slider de bienvenida de la pagina
   List slidertextotitulo =[
-    "Cochasqui1",
-    "Cochasqui2",
-    "Cochasqui3",
+    "Bienvenido al Parque",
+    "Mapa Interactivo",
+    "Realidad Aumentada",
   ];
   List slidertextosubtitulo =[
-    "Cochasqui1sub",
-    "Cochasqui2sub",
-    "Cochasqui3sub",
+    "Arqueologico Cochasqui",
+    "Disfruta del Camino",
+    "Experiencia inmersiva",
   ];
   List slidertexto =[
-    "1 assadasdasd a asdasdasdas saxdasdas asdasdasdasd dsadasdasda asdasdsad asdsa dasdas sadasdas",
-    "2 assadasdasd a asdasdasdas saxdasdas asdasdasdasd dsadasdasda asdasdsad asdsa dasdas sadasdas",
-    "3 assadasdasd a asdasdasdas saxdasdas asdasdasdasd dsadasdasda asdasdsad asdsa dasdas sadasdas",
+    "Te damos una cordial bienvenida a la aplicacion del parque cochasqui en esta aplicacion podras hacer las siguientes actividades",
+    "Mediante el mapa interactivo podras recorrer cada una de la rutas y mirar cada una de estas piramides e informate sobre la cultura caranqui",
+    "Disfruta de modelos 3d sobre las piramides y los objetos del museo para interactuar y ver informacion de estos",
 
   ];
   List sliderimagenes =[
