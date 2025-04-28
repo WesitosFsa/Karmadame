@@ -14,8 +14,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreen extends State<MainScreen> {
   List  screens = [
     HomeScreen(),
-    MapScreen(),
     MuseumScreen(),
+    MapScreen(),
     ProfileScreen()
   ];
   int currentIndex=0;
@@ -28,8 +28,9 @@ class _MainScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: screens[currentIndex],
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFECEBE9),
       bottomNavigationBar: BottomNavigationBar(
 
         onTap: onTap,

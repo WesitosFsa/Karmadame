@@ -37,7 +37,7 @@ class _RegisterCochasquiScreene extends State<RegisterCochasquiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+        backgroundColor: Color(0xFFECEBE9),
         body: Center(
           child: SingleChildScrollView(
             child: Padding(

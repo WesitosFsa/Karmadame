@@ -12,9 +12,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
   var imagenes = {
-    "slider1.png": "slider1",
-    "slider2.png": "slider2",
-    "slider3.png": "slider3",
+    "test1.jpg": "test1",
+    "test2.jpg": "test2",
+    "test3.jpg": "test3",
     "icono.png": "icono"
   };
 
@@ -23,6 +23,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
     TabController _tabController = TabController(length: 3, vsync: this);
     
     return Scaffold(
+      backgroundColor: Color(0xFFECEBE9),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.only(top: 50),
@@ -116,7 +117,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
                         image: const DecorationImage(
-                          image: AssetImage('assets/images/slider2.png'),
+                          image: AssetImage('assets/images/test1.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),

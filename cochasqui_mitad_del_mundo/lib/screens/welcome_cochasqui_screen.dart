@@ -80,7 +80,7 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
                       ButtonR(
                         width: 120,
                         showIcon: _currentPage < 2,
-
+                        
                         text: _currentPage < 2 ? null : "Empezar",
                         onTap: () {
                           if (_currentPage < 2) {
@@ -115,8 +115,8 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: _currentPage == indexDots
-                                ? Colors.white
-                                : const Color.fromARGB(158, 255, 255, 255),
+                                ? Colors.black
+                                : const Color.fromARGB(158, 48, 48, 48),
                           ),
                         );
                       }),

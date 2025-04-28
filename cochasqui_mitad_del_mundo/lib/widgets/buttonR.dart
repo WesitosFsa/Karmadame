@@ -25,18 +25,18 @@ class ButtonR extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(186, 83, 157, 226),
+          color: const Color(0xFFFC9404),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (showIcon) Image.asset("assets/images/icono.png"), // 👈 Solo si showIcon es true
+            if (showIcon) Image.asset("assets/images/icono.png"), 
             if (text != null) ...[
-              if (showIcon) const SizedBox(width: 10), // 👈 Espacio solo si hay ícono
+              if (showIcon) const SizedBox(width: 10),
               Text(
                 text!,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 16,
                 ),
               ),

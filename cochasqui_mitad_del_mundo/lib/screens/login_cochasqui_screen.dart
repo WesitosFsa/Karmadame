@@ -38,6 +38,7 @@ class _LoginCochasquiScreen extends State<LoginCochasquiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFECEBE9),
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
