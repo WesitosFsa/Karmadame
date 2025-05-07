@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 
 class LoginCochasquiScreen extends StatefulWidget {
-  const LoginCochasquiScreen({Key? key}) : super(key: key);
+  const LoginCochasquiScreen({super.key});
 
 
   @override

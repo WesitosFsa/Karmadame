@@ -1,165 +1,128 @@
-import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_mbtiles/flutter_map_mbtiles.dart';
+import 'package:cochasqui_mitad_del_mundo/common/utils.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:mbtiles/mbtiles.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key}) : super(key: key);
+  const MapScreen({super.key});
 
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  State<MapScreen> createState() => _MapScreen();
 }
 
-class _MapScreenState extends State<MapScreen> {
-  final GlobalKey _imageKey = GlobalKey();
-  final TransformationController _transformationController = TransformationController();
-  bool _showNote = true; // mostrar la nota al iniciar
-  //ubicaciones
-  List<Map<String, dynamic>> piramides = [
-    {"x": 0.75, "y": 0.27, "nombre": "Pirámide 1", "color": Colors.blue},
-    {"x": 0.55, "y": 0.38, "nombre": "Pirámide 2", "color": Colors.red},
-    {"x": 0.37, "y": 0.50, "nombre": "Pirámide 3", "color": Colors.black},
-    {"x": 0.29, "y": 0.29, "nombre": "Pirámide 4", "color": Colors.purple},
-  ];
+class _MapScreen extends State<MapScreen> {
+  final Future<MbTiles> _futureMbtiles = _initMbtiles();
+  MbTiles? _mbtiles;
+  LatLng? _currentPosition;
+  StreamSubscription<Position>? _positionStream;
 
-  void expandZoom() {
-    setState(() {
-      _transformationController.value = Matrix4.identity()..scale(2.0);
+  static Future<MbTiles> _initMbtiles() async {
+    final file = await copyAssetToFile('assets/maps/Cochasqui.mbtiles');
+    return MbTiles(mbtilesPath: file.path);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startListeningPosition();
+  }
+
+  Future<void> _startListeningPosition() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return;
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) return;
+    }
+    if (permission == LocationPermission.deniedForever) return;
+
+    _positionStream = Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 5, // actualizar solo si se mueve 5 metros
+      ),
+    ).listen((Position position) {
+      setState(() {
+        _currentPosition = LatLng(position.latitude, position.longitude);
+      });
     });
   }
-  void resetZoom() {
-    setState(() {
-      _transformationController.value = Matrix4.identity();
-    });
-  }
-  void reloadMap() {
-    setState(() {
-      _transformationController.value = Matrix4.identity();
-      _showNote = false; // cerrar la nota al recargar
-    });
+
+  @override
+  void dispose() {
+    _mbtiles?.dispose();
+    _positionStream?.cancel();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: Stack(
-        children: [
-          
-          Container( 
-            padding: EdgeInsets.only(left: 80,top: 50),
-            child: text_bold(text: 'Mapa Cochasqui') ),
-          Center(
-            child: InteractiveViewer(
-              transformationController: _transformationController,
-              maxScale: 5.0,
-              minScale: 1.0,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Stack(
-                    children: [
-                      Image.asset(
-                        "assets/images/mapa2.png",
-                        key: _imageKey,
-                        fit: BoxFit.contain,
-                      ),
-                      ...piramides.map((pir) {
-                        return FutureBuilder(
-                          future: Future.delayed(Duration.zero, () {
-                            final RenderBox renderBox = _imageKey.currentContext?.findRenderObject() as RenderBox;
-                            return renderBox.size;
-                          }),
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) return const SizedBox.shrink();
-                            final Size imageSize = snapshot.data as Size;
-                            final left = imageSize.width * pir['x'];
-                            final top = imageSize.height * pir['y'];
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text('flutter_map_mbtiles'),
+      ),
+      body: FutureBuilder<MbTiles>(
+        future: _futureMbtiles,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            _mbtiles = snapshot.data;
+            final metadata = _mbtiles!.getMetadata();
 
-                            return Positioned(
-                              left: left,
-                              top: top,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => AlertDialog(
-                                      content: Text(pir['nombre']),
-                                    ),
-                                  );
-                                },
-                                child: Icon(Icons.terrain, size: 30, color: pir['color']),
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ],
-                  );
-                },
-              ),
-            ),
-          ),
-          if (_showNote)
-            Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.6,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
+            return Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Text(
+                    'MBTiles Name: ${metadata.name}, Format: ${metadata.format}',
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Expanded(
-                      child: SingleChildScrollView(
-                        child: Text(
-                          "Información importante sobre el mapa:\n\n"
-                          "Este mapa muestra las pirámides de Cochasquí con sus ubicaciones aproximadas. "
-                          "Puedes hacer zoom para ver más detalles o tocar cada pirámide para obtener información específica.\n\n"
-                          "Las coordenadas están basadas en estudios arqueológicos recientes.",
-                          style: TextStyle(fontSize: 16),
+                Expanded(
+                  child: FlutterMap(
+                    options: MapOptions(
+                      minZoom: 16,
+                      maxZoom: 20,
+                      initialZoom: 16,
+                      initialCenter: const LatLng(0.054529, -78.305064),
+                    ),
+                    children: [
+                      TileLayer(
+                        tileProvider: MbTilesTileProvider(
+                          mbtiles: _mbtiles!,
+                          silenceTileNotFound: true,
                         ),
                       ),
-                    ),
-                    ElevatedButton(
-                      onPressed: reloadMap,
-                      child: const Text('Cerrar y Ver mapa'),
-                    ),
-                  ],
+                      if (_currentPosition != null)
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              width: 40,
+                              height: 40,
+                              point: _currentPosition!,
+                              child: const Icon(
+                                Icons.my_location,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-        ],
-      ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FloatingActionButton(
-                onPressed: resetZoom,
-                child: const Icon(Icons.zoom_out_map),
-                heroTag: 'resetZoom',
-              ),
-              const SizedBox(width: 10),
-              FloatingActionButton(
-                onPressed: expandZoom,
-                child: const Icon(Icons.zoom_in_map),
-                heroTag: 'expandZoom',
-              ),
-            ],
-          ),
-        ),
+              ],
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }

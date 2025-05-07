@@ -1,5 +1,3 @@
-import 'package:cochasqui_mitad_del_mundo/screens/login_cochasqui_screen.dart';
-import 'package:cochasqui_mitad_del_mundo/screens/main/home_screen.dart';
 import 'package:cochasqui_mitad_del_mundo/screens/main/main_screen.dart';
 import 'package:cochasqui_mitad_del_mundo/screens/welcome_cochasqui_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
-  const MyApp({Key? key}) : super(key:key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(),
+      home: WelcomeCochasquiScreen(),
       
     );
   }
