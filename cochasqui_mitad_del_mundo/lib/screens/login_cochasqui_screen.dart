@@ -4,7 +4,6 @@ import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 
 class LoginCochasquiScreen extends StatefulWidget {
   const LoginCochasquiScreen({super.key});

@@ -6,10 +6,11 @@ import 'package:ar_flutter_plugin_updated/managers/ar_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_flutter_plugin_updated/datatypes/node_types.dart';
 import 'package:ar_flutter_plugin_updated/models/ar_node.dart';
+// ignore: depend_on_referenced_packages
 import 'package:vector_math/vector_math_64.dart';
 
 class MuseumScreen extends StatefulWidget {
-  const MuseumScreen({Key? key}) : super(key: key);
+  const MuseumScreen({super.key});
 
   @override
   State<MuseumScreen> createState() => _MuseumScreenState();

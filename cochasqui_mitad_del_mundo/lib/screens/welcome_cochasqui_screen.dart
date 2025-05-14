@@ -3,10 +3,9 @@ import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class WelcomeCochasquiScreen extends StatefulWidget {
-  const WelcomeCochasquiScreen({Key? key}) : super(key: key);
+  const WelcomeCochasquiScreen({super.key});
 
   @override
   State<WelcomeCochasquiScreen> createState() => _WelcomeCochasquiScreen();
@@ -55,6 +54,7 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
             height: double.maxFinite,
             decoration: BoxDecoration(
               image: DecorationImage(
+                // ignore: prefer_interpolation_to_compose_strings
                 image: AssetImage("assets/images/" + sliderimagenes[index]),
                 fit: BoxFit.cover,
               ),
@@ -72,6 +72,7 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
                           color: Colors.blueGrey,
                           size: 30),
                       SizedBox(height: 20),
+                      // ignore: sized_box_for_whitespace
                       Container(
                         width: 250,
                         child: text_simple(text: slidertexto[index]),
@@ -90,7 +91,7 @@ class _WelcomeCochasquiScreen extends State<WelcomeCochasquiScreen> {
                               curve: Curves.easeInOut,
                             );
                           } else {
-                            // TODO: Navegar a la pantalla de inicio de sesión
+                            
                             Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => LoginCochasquiScreen()),

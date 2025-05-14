@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ButtonR extends StatelessWidget {
   bool? isResponsive;
   double? width;
@@ -7,6 +8,7 @@ class ButtonR extends StatelessWidget {
   String? text;
   final bool showIcon; 
 
+  // ignore: use_super_parameters
   ButtonR({
     Key? key,
     this.width,

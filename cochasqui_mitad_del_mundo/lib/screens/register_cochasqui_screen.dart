@@ -3,10 +3,9 @@ import 'package:cochasqui_mitad_del_mundo/widgets/buttonR.dart';
 import 'package:cochasqui_mitad_del_mundo/widgets/fonts_bold.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 
 class RegisterCochasquiScreen extends StatefulWidget {
-  const RegisterCochasquiScreen({Key? key}) : super(key: key);
+  const RegisterCochasquiScreen({super.key});
 
   @override
   State<RegisterCochasquiScreen> createState() => _RegisterCochasquiScreene();

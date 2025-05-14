@@ -20,6 +20,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     TabController _tabController = TabController(length: 3, vsync: this);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -164,6 +165,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
                           image: DecorationImage(
+                            // ignore: prefer_interpolation_to_compose_strings
                             image: AssetImage('assets/images/' + imagenes.keys.elementAt(index)),
                             fit: BoxFit.contain,
                           ),
